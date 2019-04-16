@@ -30,7 +30,7 @@ def prime(number):
 	return True
 
 def getName(a,b,p):
-	return "im"+str(a)+str(b)+str(p)+".png"
+	return "im"+str(a)+"&"+str(b)+"&"+str(p)+".png"
 
 def saveImage(counter,a,b,p):
 	image_name = getName(a,b,p)
@@ -77,7 +77,13 @@ def getDict(a,b,p):
 
 @curves.route("/")
 def red1():
-	return redirect("/curve")
+	return redirect("/made")
+
+
+@curves.route("/made")
+def made():
+	previous = ScatterMade.query.all()
+	return render_template("prev.html",previous=previous)
 
 
 # for logging out

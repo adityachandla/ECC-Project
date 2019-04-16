@@ -14,7 +14,7 @@ def login():
 			return redirect(url_for("authenticate.login"))
 		if user.password == form.password.data:
 			session["username"] = form.username.data
-			return redirect("/curve")
+			return redirect("/made")
 		else:
 			flash("Invalid Authentication")
 			return redirect(url_for('authenticate.login'))
