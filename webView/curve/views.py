@@ -86,19 +86,9 @@ def made():
 	return render_template("prev.html",previous=previous)
 
 
-# for logging out
-@curves.route('/signout')
-def signout():
-	if 'username' in session:
-		session.pop('username')
-	return redirect('/auth/login')
-
 
 @curves.route("/curve", methods=["GET","POST"])
 def take_input():
-	if 'username' not in session:
-		return redirect("/auth/login")
-
 	form = CurveInput()
 	if form.validate_on_submit():
 		if form.p.data > 150 or not prime(form.p.data):
@@ -111,9 +101,6 @@ def take_input():
 
 @curves.route("/curve/<numbers>", methods=["GET","POST"])
 def put_curve(numbers):
-	if 'username' not in session:
-		return redirect("/auth/login")
-
 	a,b,p = map(int,numbers.split("&"))
 	return render_template("final_curve.html",params=getDict(a,b,p))
 
